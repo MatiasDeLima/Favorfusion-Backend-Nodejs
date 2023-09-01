@@ -68,7 +68,7 @@ export const getSingleFood = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const food = await Food.findById(id);
+        const food = await Food.findById(id).populate("reviews");
 
         res.status(200).json({
             success: true,
@@ -90,7 +90,7 @@ export const getAllFood = async (req, res) => {
     // console.log(page);
 
     try {
-        const foods = await Food.find({}).skip(page * 8).limit(8)
+        const foods = await Food.find({}).populate("reviews").skip(page * 8).limit(8)
 
         res.status(200).json({
             success: true,
@@ -113,7 +113,7 @@ export const getFoodBySearch = async (req, res) => {
         // gte means greater than equal
         const foods = await Food.find({
             title
-        });
+        }).populate("reviews");
 
         res.status(200).json({
             success: true,
@@ -131,7 +131,7 @@ export const getFoodBySearch = async (req, res) => {
 // get discount food
 export const getDiscountFood = async (req, res) => {
     try {
-        const foods = await Food.find({ discount: true }).limit(8);
+        const foods = await Food.find({ discount: true }).populate("reviews").limit(8);
 
         res.status(200).json({
             success: true,

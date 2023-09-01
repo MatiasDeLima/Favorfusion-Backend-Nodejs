@@ -2,15 +2,16 @@ import express from "express";
 import { createFood, deleteFood, getAllFood, getDiscountFood, getFoodBySearch, getFoodCount, getSingleFood, updateFood } from "./../controllers/foodController.js";
 
 const router = express.Router();
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 // create food router
-router.post("/", createFood);
+router.post("/", verifyAdmin, createFood);
 
 // update food router
-router.put("/:id", updateFood);
+router.put("/:id", verifyAdmin, updateFood);
 
 // delete food router
-router.delete("/:id", deleteFood);
+router.delete("/:id", verifyAdmin, deleteFood);
 
 // get single food router
 router.get("/:id", getSingleFood);
