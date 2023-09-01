@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import foodRoute from "./routes/foods.js";
+import userRoute from "./routes/foods.js";
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,7 @@ const connect = async () => {
 app.use(express.json());
 app.use(cors());
 app.use("/foods", foodRoute);
+app.use("/users", )
 
 app.listen(port, () => {
     connect();
